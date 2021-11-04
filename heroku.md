@@ -98,3 +98,61 @@ Heroku can fetch updates from your GitHub repository, but you have to connect it
 1. In the "Connect to GitHub" section, chose the account you wish to connect to and search for the repository. 
 1. Click "Search"
 1. You can chose which brantch to deploy from, using the "Automatic deploys" that appears when you successfully connect to a repository, or manually deploy from the "Manual deploy" section.
+
+## Environment variables
+
+Heroku has environment variables, which can be set in the settings-tab under the name "Config Vars" in your app:
+- https://dashboard.heroku.com/apps/[app-name]/settings
+
+These variables are straight forward key-value pairs, and will overwrite the values in your environment variable file, like .env.
+
+## Third party software packages
+
+As mentioned, Heroku allows for a varaiety of third party packages and software, one way of using them is though herokus official buildpack, heroku-buildpack-apt. 
+
+This can be enabled though Heroku CLI:
+1. Add the latest stable buildpack
+    - $ `heroku buildpacks:add --index 1 heroku-community/apt -a [app-name]`
+
+... or in the the GUI:
+1. Go to your apps settings-tab
+    - https://dashboard.heroku.com/apps/[app-name]/settings
+1. In the "Buidlpacks" section, click "Add buildpack"
+1. Enter this URL in the field: `https://github.com/heroku/heroku-buildpack-apt`
+1. Click "Save changes"
+
+> :information_source: **To use heroku-buildpack-apt and update the packages it manages, your Heroku app must be installed though Git.**
+
+- [Heroku APT buildpack](https://github.com/heroku/heroku-buildpack-apt)
+- [Detailed example for Aptfile](https://medium.com/analytics-vidhya/deploying-a-streamlit-and-opencv-based-web-application-to-heroku-456691d28c41)
+
+1. Create an Aptfile with the names of the packages you want to use
+    - heroku-buildpack-apt will use this to download and install the third party packages.
+    - E.g.: `tesseract-ocr` for a package called "tesseract-ocr".
+1. Push Heroku Git remote if you created an app without remote
+   - $ `heroku git:remote --app [app-name]`
+1. Add the core files (App.json, Aptfile, Procfile, .jar-file) or just all the files
+    1. $ `git add .` (all files)
+    1. $ `git commit -m "First deploy"`
+    1. $ `git push heroku master`
+1. Assuming your process is called "web" in the Procfile, start the app
+   - $ `heroku ps:scale web=1`
+
+> :warning: **Note that not all third party programs work with the all Heroku stacks.**
+
+You can set the Heroku stack (here shown as changeing to the heroku-18 stack):
+1. Show current stack (optional)
+    - `$ heroku stack` 
+1. Set the stack
+    - `$ heroku stack:set heroku-18`
+
+## Maintenance and troubleshooting
+
+- Restart dynos (restart app)
+    - `$ heroku ps:restart`
+- Running bash inside Heroku might be useful for debug.
+    - `$ heroku run bash`
+- Find a directory
+    - `$ find -iname [directory-name]`
+- Find path of an executable
+    - `$ which [executable-name]`
