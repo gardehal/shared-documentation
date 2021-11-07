@@ -17,8 +17,11 @@ Firebase offers two types of databases, from [the docs](https://firebase.google.
 
 ## Kotlin+Maven connection
 
+- [Helpful StackOverflow post](https://stackoverflow.com/questions/40799258/where-can-i-get-serviceaccountcredentials-json-for-firebase-admin)
+- [Official guide](https://firebase.google.com/docs/database/admin/start#authenticate-with-admin-privileges)
+
 Although an API is not the intended usecases for Firebase, not to even mentioning NoSql, since it has some use-cases for phone apps (Andriod apps, often developed in Kotlin) it is possible with some rigging.
-First off all, this requires a set up database. For some reason, (Cloud) Firestore Database seems to be working best for this. 
+First off all, this requires a set up database. For some reason, (Cloud) Firestore Database seems to be working best for this.
 
 The following list of files and functionalities are required:
 - A third party package for Firebase.
@@ -51,14 +54,15 @@ The following list of files and functionalities are required:
         "client_x509_cert_url": "clientUrl"
     }
     ```
+  - These calues can be found in your Firebase app, by clicking the cog next to "Project Overview" top right, then "Project settings", under the tab "Service accounts". Click on "Generate new private key" which will download the JSON file with secrets to your device.
 - A method that initializes Firebase and gets the instance of the app, early in the startup (after you read the secrets from your config-sources). In Kotlin, a class annotated with
 ``` @Primary @Component ``` with a constructor annotated with ``` @PostConstruct ``` should be enough.
 
-## React+Node connection
+## React+NPM connection
 
 The following list of files and functionalities are required:
 - A third party package for Firebase.
-  - Node:
+  - NPM:
     - ```
       "firebase": "^7.15.4"
       ```
@@ -73,4 +77,23 @@ The following list of files and functionalities are required:
         messagingSenderId: REACT_APP_FB_SID
     }
     ```
+  - These calues can be found in your Firebase app, by clicking the cog next to "Project Overview" top right, then "Project settings", under the tab "General".
 - A method that initializes Firebase and gets the instance of the app, early in the startup (after you read the secrets from your config-sources). React has a App.js file with a class App, which has a constructor perfect for this.
+
+## Database rules
+
+TODO
+
+```
+service cloud.firestore 
+{
+  match /databases/{database}/documents 
+  {
+    match /{document=**} 
+    {
+      allow read;
+      allow write: if (request.auth != null)
+    }
+  }
+}
+```
