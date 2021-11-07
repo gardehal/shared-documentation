@@ -21,19 +21,36 @@ Although an API is not the intended usecases for Firebase, not to even mentionin
 First off all, this requires a set up database. For some reason, (Cloud) Firestore Database seems to be working best for this. 
 
 The following list of files and functionalities are required:
-- A third party package for Firebase. E.g. Maven: com.google.firebase.FirebaseApp
+- A third party package for Firebase.
+  - Maven: 
+    - ```
+        <dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>7.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gms</groupId>
+			<artifactId>google-services</artifactId>
+			<version>3.1.1</version>
+			<scope>runtime</scope>
+		</dependency>
+        ```
 - A JSON string with the following keys and secrets:
-  - FIREBASE_URL
-  - FIREBASE_TYPE
-  - FIREBASE_PROJECT_ID
-  - FIREBASE_PRIVATE_KEY_ID
-  - FIREBASE_PRIVATE_KEY
-  - FIREBASE_CLIENT_EMAIL
-  - FIREBASE_CLIENT_ID
-  - FIREBASE_AUTH_URI
-  - FIREBASE_TOKEN_URI
-  - FIREBASE_AUTH_PROVIDER_X509_CERT_URL
-  - FIREBASE_CLIENT_X509_CERT_URL
+  - ```
+    {
+        "type": "type",
+        "project_id": "pId",
+        "private_key_id": "pKeyId",
+        "private_key": "pKey",
+        "client_email": "cEmail",
+        "client_id": "cId",
+        "auth_uri": "aUri",
+        "token_uri": "tUri",
+        "auth_provider_x509_cert_url": "authUrl",
+        "client_x509_cert_url": "clientUrl"
+    }
+    ```
 - A method that initializes Firebase and gets the instance of the app, early in the startup (after you read the secrets from your config-sources)
 
 ## JS/Node connection
