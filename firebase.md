@@ -15,7 +15,7 @@ Firebase offers two types of databases, from [the docs](https://firebase.google.
 - Cloud Firestore is Firebase's newest database for mobile app development. It builds on the successes of the Realtime Database with a new, more intuitive data model. Cloud Firestore also features richer, faster queries and scales further than the Realtime Database.
 - Realtime Database is Firebase's original database. It's an efficient, low-latency solution for mobile apps that require synced states across clients in realtime.
 
-## Kotlin connection
+## Kotlin+Maven connection
 
 Although an API is not the intended usecases for Firebase, not to even mentioning NoSql, since it has some use-cases for phone apps (Andriod apps, often developed in Kotlin) it is possible with some rigging.
 First off all, this requires a set up database. For some reason, (Cloud) Firestore Database seems to be working best for this. 
@@ -24,18 +24,18 @@ The following list of files and functionalities are required:
 - A third party package for Firebase.
   - Maven: 
     - ```
-        <dependency>
-			<groupId>com.google.firebase</groupId>
-			<artifactId>firebase-admin</artifactId>
-			<version>7.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gms</groupId>
-			<artifactId>google-services</artifactId>
-			<version>3.1.1</version>
-			<scope>runtime</scope>
-		</dependency>
-        ```
+      <dependency>
+          <groupId>com.google.firebase</groupId>
+          <artifactId>firebase-admin</artifactId>
+          <version>7.0.0</version>
+      </dependency>
+      <dependency>
+          <groupId>com.google.gms</groupId>
+          <artifactId>google-services</artifactId>
+          <version>3.1.1</version>
+          <scope>runtime</scope>
+      </dependency>
+      ```
 - A JSON string with the following keys and secrets:
   - ```
     {
@@ -51,8 +51,26 @@ The following list of files and functionalities are required:
         "client_x509_cert_url": "clientUrl"
     }
     ```
-- A method that initializes Firebase and gets the instance of the app, early in the startup (after you read the secrets from your config-sources)
+- A method that initializes Firebase and gets the instance of the app, early in the startup (after you read the secrets from your config-sources). In Kotlin, a class annotated with
+``` @Primary @Component ``` with a constructor annotated with ``` @PostConstruct ``` should be enough.
 
-## JS/Node connection
+## React+Node connection
 
-TODO
+The following list of files and functionalities are required:
+- A third party package for Firebase.
+  - Node:
+    - ```
+      "firebase": "^7.15.4"
+      ```
+- An object with the following keys and and secrets:
+  - ```
+    {
+        apiKey: REACT_APP_FB_KEY,
+        authDomain: REACT_APP_FB_DOM,
+        databaseURL: REACT_APP_FB_URL,
+        projectId: REACT_APP_FB_PID,
+        storageBucket: REACT_APP_FB_SBU,
+        messagingSenderId: REACT_APP_FB_SID
+    }
+    ```
+- A method that initializes Firebase and gets the instance of the app, early in the startup (after you read the secrets from your config-sources). React has a App.js file with a class App, which has a constructor perfect for this.
