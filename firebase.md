@@ -82,7 +82,7 @@ The following list of files and functionalities are required:
 
 ## Database rules
 
-TODO
+Both versions of NoSql allows for setting database rules. The following rule allows anyone to read data, but only authenticated users to make changes.
 
 ```
 service cloud.firestore 
@@ -97,3 +97,14 @@ service cloud.firestore
   }
 }
 ```
+
+## Not tested or used parts
+
+#### Storage
+
+"Cloud Storage for Firebase" is intended to "store and serve user-generated content, such as photos or videos". This should be eaccessible with the connections described above. 
+TODO find and add actual usage
+
+#### Hosting
+#### Functions
+#### Authentication
