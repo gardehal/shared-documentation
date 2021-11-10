@@ -8,15 +8,21 @@ Python is a dynamically-typed object oriented high-level general-purpose languag
 
 ## Python
 
-## Common PIP packages
+## PIP packages
 
-- cv2, an image manipulation package []()
-- request
-- time
-- datetime
-- enum
-- os
-- sys
+#### Common packages
+
+- os, operating system functions, file manupulation and similar [documentation](https://docs.python.org/3/library/os.html)
+- sys, system functions, script arguments, path [documentation](https://docs.python.org/3/library/sys.html)
+- cv2/opencv-python, an image manipulation package [documentation](https://pypi.org/project/opencv-python/)
+- requests, web requests [documentation](https://pypi.org/project/requests/)
+- time, controlling time [documentation](https://docs.python.org/3/library/time.html)
+- datetime, controlling dates and datetime [documentation](https://docs.python.org/3/library/datetime.html)
+- enum, for enums [documentation](https://docs.python.org/3/library/enum.html)
+
+#### Personal packages
+
+- Utilities with miscellaneous methods [GitHub](https://github.com/grdall/python-packages/tree/main/myutil)
 
 ## PIP commands
 
@@ -35,10 +41,17 @@ Python is a dynamically-typed object oriented high-level general-purpose languag
 - Update PIP
   - $ `pip install --upgrade pip`
 
-## Personal packages
-
-- Utilities with miscellaneous methods [GitHub](https://github.com/grdall/python-packages/tree/main/myutil)
-
 ## VS Code
 
-## VS Code extentions
+Since VS Code is a general purpose editor, a lighter language like Python can be used along it without losing key features like integration to databases, server, or similar.
+There are other editors which go along with Python, such as Sublime, Atom, or the heavier PyCharm from JetBrains.
+
+#### VS Code extentions
+
+- MagicPython
+- Python Extension Pack
+- Pylance
+- Python
+- Python for VSCode
+- Code Spell Checker
+- 
