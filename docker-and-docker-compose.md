@@ -6,8 +6,23 @@ Software can be deployed in virtual operating systems called containers, which a
 
 - [Docker documentation](https://docs.docker.com)
 
-#### Windows
+#### Setup on Windows
 
 ## Docker compose
+
+Docker Compose is a tool for Docker for managing multiple containers with YAML files. These containers can also be manged with CLI commands.
+
+#### CLI
+
+- [Official Documentation](https://docs.docker.com/compose/reference/)
+
+- List containers
+  - $ `docker ps`
+- Kill/destroy a container
+  - $ `docker kill [container id]`
+- Start a container
+  - $ `docker start [container id]`
+- Stop a container
+  - $ `docker stop [container id]`
 
 ## Kubernetes
